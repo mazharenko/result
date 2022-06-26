@@ -11,3 +11,7 @@ max_line_length = 150
 [*.csproj]
 indent_style = space
 indent_size = 2
+
+[*.cs]
+dotnet_diagnostic.CS8524.severity = none
+dotnet_diagnostic.CS8509.severity = error
