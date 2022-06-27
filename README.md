@@ -8,7 +8,7 @@
 Yet another `Result` monad implementation, yet with some unconventional features.
 
 Interactive README in mybinder:\
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/mazharenko/result/HEAD)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/mazharenko/result/HEAD?urlpath=tree/README.ipynb)
 
 Also in nbviewer:\
 [![nbviewer](https://raw.githubusercontent.com/jupyter/design/master/logos/Badges/nbviewer_badge.svg)](https://nbviewer.org/github/mazharenko/result/tree/HEAD/docs/README.ipynb)
