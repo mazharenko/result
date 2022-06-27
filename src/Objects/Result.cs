@@ -31,7 +31,7 @@ public readonly struct Result<T, TFailure>
 	}
 
 	public static Result<T, TFailure> Success(T? value) => new(value);
-	
+
 	public static Result<T, TFailure> Failure([DisallowNull] TFailure failure) => new(failure);
 
 	public TResult Match<TResult>(TResult successValue, TResult failureValue)

@@ -6,6 +6,14 @@
     <Nullable>enable</Nullable>
     <RootNamespace>mazharenko.result</RootNamespace>
   </PropertyGroup>
+  <PropertyGroup>
+    <PackageId>mazharenko.result</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>mazharenko</Authors>
+    <PackageDescription>Yet another result monad</PackageDescription>
+    <RepositoryUrl>https://github.com/mazharenko/result</RepositoryUrl>
+    <PackageLicenseExpression>CC0-1.0</PackageLicenseExpression>
+  </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="2022.1.0" />
