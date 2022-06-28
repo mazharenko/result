@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace mazharenko.result.Objects;
+namespace mazharenko.result;
 
 [JetBrains.Annotations.PublicAPI]
 public readonly struct SuccessResult<T>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using JetBrains.Annotations;
-using mazharenko.result.Objects;
 
 namespace mazharenko.result;
 

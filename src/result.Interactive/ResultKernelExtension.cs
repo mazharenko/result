@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using JetBrains.Annotations;
-using mazharenko.result.Objects;
 using Microsoft.DotNet.Interactive;
 using Microsoft.DotNet.Interactive.Formatting;
 using static Microsoft.DotNet.Interactive.Formatting.PocketViewTags;

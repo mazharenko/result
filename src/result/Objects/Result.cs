@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 
-namespace mazharenko.result.Objects;
+namespace mazharenko.result;
 
 [PublicAPI]
 public readonly struct Result<T, TFailure>

@@ -17,3 +17,5 @@ indent_size = 2
 dotnet_diagnostic.CS8524.severity = none
 # The switch expression does not handle all possible inputs (it is not exhaustive)
 dotnet_diagnostic.CS8509.severity = error
+# Namespace does not correspond to file location
+resharper_check_namespace_highlighting = hint
