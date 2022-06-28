@@ -5,8 +5,10 @@
     <LangVersion>10.0</LangVersion>
     <Nullable>enable</Nullable>
     <RootNamespace>mazharenko.result</RootNamespace>
+    <AssemblyName>result</AssemblyName>
   </PropertyGroup>
   <PropertyGroup>
+    <IsPackable>true</IsPackable>
     <PackageId>mazharenko.result</PackageId>
     <Version>0.1.2</Version>
     <Authors>mazharenko</Authors>

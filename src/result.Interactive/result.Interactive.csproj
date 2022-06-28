@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>10.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <RootNamespace>mazharenko.result.Interactive</RootNamespace>
+    <AssemblyName>result.Interactive</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup>
+    <IsPackable>true</IsPackable>
+    <PackageId>mazharenko.result.Interactive</PackageId>
+    <Version>0.1.5</Version>
+    <Authors>mazharenko</Authors>
+    <PackageDescription>.NET Interactive extensions for yet another result monad</PackageDescription>
+    <RepositoryUrl>https://github.com/mazharenko/result</RepositoryUrl>
+    <PackageLicenseExpression>CC0-1.0</PackageLicenseExpression>
+    <NoWarn>$(NoWarn);NU5100;NU5104</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="microsoft.dotnet.interactive" Version="1.0.0-beta.22256.1" />
+    <PackageReference Include="microsoft.dotnet.interactive.csharp" Version="1.0.0-beta.22256.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="$(OutputPath)/result.Interactive.dll" Pack="true" PackagePath="interactive-extensions/dotnet" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\result\result.csproj" />
+  </ItemGroup>
+</Project>
