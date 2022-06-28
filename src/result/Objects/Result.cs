@@ -14,23 +14,25 @@ public readonly struct Result<T, TFailure>
 		Failure
 	}
 
-	private readonly T? value = default;
-	private readonly TFailure failure = default!;
+	private readonly T value;
+	private readonly TFailure failure;
 	private readonly Tag tag;
 
-	private Result(T? value)
+	private Result(T value)
 	{
 		tag = Tag.Success;
-		this.value = value;
+		this.value = value ?? throw new ArgumentNullException(nameof(value));
+		failure = default!;
 	}
 
 	private Result([DisallowNull] TFailure failure)
 	{
 		tag = Tag.Failure;
+		value = default!;
 		this.failure = failure ?? throw new ArgumentNullException(nameof(failure));
 	}
 
-	public static Result<T, TFailure> Success(T? value) => new(value);
+	public static Result<T, TFailure> Success([DisallowNull] T value) => new(value);
 
 	public static Result<T, TFailure> Failure([DisallowNull] TFailure failure) => new(failure);
 
@@ -43,7 +45,7 @@ public readonly struct Result<T, TFailure>
 		};
 	}
 
-	public void Match(Action<T?> successA, Action<TFailure> failureA)
+	public void Match(Action<T> successA, Action<TFailure> failureA)
 	{
 		switch (tag)
 		{
@@ -56,7 +58,7 @@ public readonly struct Result<T, TFailure>
 		}
 	}
 
-	public TResult Match<TResult>(Func<T?, TResult> successF, Func<TFailure, TResult> failureF)
+	public TResult Match<TResult>(Func<T, TResult> successF, Func<TFailure, TResult> failureF)
 	{
 		return tag switch
 		{
@@ -65,7 +67,7 @@ public readonly struct Result<T, TFailure>
 		};
 	}
 
-	public async Task<TResult> MatchAsync<TResult>(Func<T?, Task<TResult>> successF,
+	public async Task<TResult> MatchAsync<TResult>(Func<T, Task<TResult>> successF,
 		Func<TFailure, Task<TResult>> failureF)
 	{
 		return tag switch
@@ -75,7 +77,7 @@ public readonly struct Result<T, TFailure>
 		};
 	}
 
-	public async Task MatchAsync(Func<T?, Task> successA, Func<TFailure, Task> failureA)
+	public async Task MatchAsync(Func<T, Task> successA, Func<TFailure, Task> failureA)
 	{
 		switch (tag)
 		{
@@ -88,7 +90,7 @@ public readonly struct Result<T, TFailure>
 		}
 	}
 
-	public static implicit operator Result<T, TFailure>(T from) => Success(from);
+	public static implicit operator Result<T, TFailure>([DisallowNull] T from) => Success(from);
 	public static implicit operator Result<T, TFailure>([DisallowNull] TFailure from) => Failure(from);
 
 	public static implicit operator Result<T, TFailure>(SuccessResult<T> from) => Success(from.Value);

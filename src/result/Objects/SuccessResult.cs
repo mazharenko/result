@@ -1,18 +1,19 @@
-﻿using JetBrains.Annotations;
+﻿using System.Diagnostics.CodeAnalysis;
 
 namespace mazharenko.result.Objects;
 
-[PublicAPI]
+[JetBrains.Annotations.PublicAPI]
 public readonly struct SuccessResult<T>
 {
-	public T? Value { get; }
+	[NotNull]
+	public T Value { get; }
 
 	public SuccessResult()
 	{
-		Value = default;
+		Value = default!;
 	}
 
-	internal SuccessResult(T? value)
+	internal SuccessResult([DisallowNull] T value)
 	{
 		Value = value;
 	}
