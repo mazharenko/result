@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "result", "src/result.csproj", "{729BEA88-95D4-4A3E-9450-7EBB18CE5381}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{566B5036-6195-49AD-9782-E1B402DBBCEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "result", "src\result\result.csproj", "{9DFFC592-8D8E-4641-8E46-9DCD590B5B03}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -10,13 +10,12 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{729BEA88-95D4-4A3E-9450-7EBB18CE5381}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{729BEA88-95D4-4A3E-9450-7EBB18CE5381}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{729BEA88-95D4-4A3E-9450-7EBB18CE5381}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{729BEA88-95D4-4A3E-9450-7EBB18CE5381}.Release|Any CPU.Build.0 = Release|Any CPU
-		{993FC766-1B89-4A84-A94B-5BA88AA07D8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DFFC592-8D8E-4641-8E46-9DCD590B5B03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DFFC592-8D8E-4641-8E46-9DCD590B5B03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DFFC592-8D8E-4641-8E46-9DCD590B5B03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DFFC592-8D8E-4641-8E46-9DCD590B5B03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{729BEA88-95D4-4A3E-9450-7EBB18CE5381} = {566B5036-6195-49AD-9782-E1B402DBBCEC}
+		{9DFFC592-8D8E-4641-8E46-9DCD590B5B03} = {566B5036-6195-49AD-9782-E1B402DBBCEC}
 	EndGlobalSection
 EndGlobal
