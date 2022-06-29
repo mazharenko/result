@@ -1,4 +1,6 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
 using JetBrains.Annotations;
 
 namespace mazharenko.result;
@@ -40,4 +42,35 @@ public static class ExtractExtensions
 		(var isSuccess, _, failure) = Get(result);
 		return isSuccess;
 	}
+
+	[MustUseReturnValue]
+	public static T Or<T, TFailure>(this Result<T, TFailure> source, Func<TFailure, T> function)
+	{
+		return source.Match(value => value, function);
+	}
+
+	[MustUseReturnValue]
+	public static T Or<T, TFailure>(this Result<T, TFailure> source, Func<T> function)
+	{
+		return source.Or(_ => function());
+	}
+
+	[Pure]
+	public static T Or<T, TFailure>(this Result<T, TFailure> source, T fallbackValue)
+	{
+		return source.Or(_ => fallbackValue);
+	}
+	
+	[MustUseReturnValue]
+	public static async Task<T> OrAsync<T, TFailure>(this Result<T, TFailure> source, Func<TFailure, Task<T>> function)
+	{
+		return await source.MatchAsync(Task.FromResult, function).ConfigureAwait(false);
+	}
+
+	[MustUseReturnValue]
+	public static Task<T> OrAsync<T, TFailure>(this Result<T, TFailure> source, Func<Task<T>> function)
+	{
+		return source.OrAsync(_ => function());
+	}
+
 }

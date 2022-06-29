@@ -10,7 +10,7 @@
   <PropertyGroup>
     <IsPackable>true</IsPackable>
     <PackageId>mazharenko.result</PackageId>
-    <Version>0.2.0</Version>
+    <Version>0.2.1</Version>
     <Authors>mazharenko</Authors>
     <PackageDescription>Yet another result monad</PackageDescription>
     <RepositoryUrl>https://github.com/mazharenko/result</RepositoryUrl>
