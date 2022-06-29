@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using JetBrains.Annotations;
 using Microsoft.DotNet.Interactive;
 using Microsoft.DotNet.Interactive.Formatting;
@@ -10,8 +11,11 @@ internal static class ResultExtensions
 {
 	public static string FormatResult<T, TFailure>(this Result<T, TFailure> result)
 	{
+		var typeHash = result.Match(typeof(T).GetHashCode(), typeof(TFailure).GetHashCode());
 		return (
-				   (span[style: $"border: 4px solid {result.Match("green", "red")}; padding: 10px; display: inline-block"](
+				   (span[style: $"border: 4px solid {result.Match("green", "red")}; " +
+								$"background-color: hsla({typeHash % 360}, 100%, 60%, 0.2); " +
+								"padding: 10px; display: inline-block"](
 						   result.Match<object?>(value => value, error => error)
 					   ))
 			   ).ToString();
