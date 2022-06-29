@@ -33,7 +33,7 @@ public static class ExtractExtensions
 	}
 
 	[Pure]
-	public static bool TryGet<T, TFailure>(this Result<T, TFailure> result,
+	public static bool TryGetFailure<T, TFailure>(this Result<T, TFailure> result,
 		[MaybeNullWhen(false)] out TFailure failure)
 		where TFailure : class
 	{
