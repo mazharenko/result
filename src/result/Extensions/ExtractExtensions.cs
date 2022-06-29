@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 
@@ -9,7 +11,7 @@ namespace mazharenko.result;
 public static class ExtractExtensions
 {
 	[Pure]
-	private static (bool, T, TFailure) Get<T, TFailure>(Result<T, TFailure> result)
+	internal static (bool isSuccess, T value, TFailure failure) Get<T, TFailure>(Result<T, TFailure> result)
 	{
 		return result.Match(v => (true, v, default(TFailure)!), f => (false, default(T)!, f));
 	}
@@ -72,5 +74,30 @@ public static class ExtractExtensions
 	{
 		return source.OrAsync(_ => function());
 	}
+	
+	[Pure]
+	public static (ICollection<T> oks, ICollection<TFailure> failures) Partition<T, TFailure>(
+		this IEnumerable<Result<T, TFailure>> results)
+	{
+		var failures = new List<TFailure>();
+		var oks = results.ChooseSuccess(failures.Add);
+		return (oks, failures);
+	}
+	
+	public static ICollection<T> ChooseSuccess<T, TFailure>(this IEnumerable<Result<T, TFailure>> source,
+		Action<TFailure> actionForFailures)
+	{
+		return source.Choose(x => x, actionForFailures);
+	}
 
+	public static ICollection<T> Choose<TIn, T, TFailure>(this IEnumerable<TIn> source,
+		Func<TIn, Result<T, TFailure>> f,
+		Action<TFailure> actionForFailures)
+	{
+		return source.Select(f)
+			.Select(Get)
+			.Where(t => t.isSuccess)
+			.Select(t => t.value)
+			.ToList();
+	}
 }
