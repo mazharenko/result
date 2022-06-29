@@ -24,5 +24,5 @@ public static class Result
 	public static SuccessResult<T> Success<T>([DisallowNull] T success) => new(success);
 
 	[Pure]
-	public static FailureResult<TFailure> Failure<TFailure>([DisallowNull]TFailure failure) => new(failure);
+	public static FailureResult<TFailure> Failure<TFailure>([DisallowNull] TFailure failure) => new(failure);
 }

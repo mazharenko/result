@@ -18,7 +18,7 @@ public readonly struct Result<T, TFailure>
 	private readonly TFailure failure;
 	private readonly Tag tag;
 
-	private Result(T value)
+	private Result([DisallowNull] T value)
 	{
 		tag = Tag.Success;
 		this.value = value ?? throw new ArgumentNullException(nameof(value));
