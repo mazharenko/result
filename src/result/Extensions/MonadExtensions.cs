@@ -16,6 +16,13 @@ public static class MonadExtensions
 			error => Result<TOut, TFailure>.Failure(error!)
 		);
 	}
+	
+	public static Result<T3, TFailure> SelectMany<T1, T2, T3, TFailure>(this Result<T1, TFailure> source,
+		Func<T1, Result<T2, TFailure>> function,
+		Func<T1, T2, T3> projection)
+	{
+		return source.Bind(el => function(el).Map(el2 => projection(el, el2)));
+	}
 
 	[MustUseReturnValue]
 	public static async Task<Result<TOut, TFailure>> BindAsync<T, TOut, TFailure>(this Result<T, TFailure> source,
@@ -46,4 +53,6 @@ public static class MonadExtensions
 				   function
 			   ).ConfigureAwait(false);
 	}
+	
+	
 }

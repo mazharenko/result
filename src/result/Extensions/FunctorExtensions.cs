@@ -16,6 +16,13 @@ public static class FunctorExtensions
 			error => Result<TOut, TFailure>.Failure(error!)
 		);
 	}
+	
+	[MustUseReturnValue]
+	public static Result<TOut, TFailure> Select<T1, TOut, TFailure>(this Result<T1, TFailure> source,
+		Func<T1, TOut> function)
+	{
+		return source.Map(function);
+	}
 
 	[MustUseReturnValue]
 	public static async Task<Result<TOut, TFailure>> MapAsync<T, TOut, TFailure>(this Result<T, TFailure> source,
