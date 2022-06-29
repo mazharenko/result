@@ -7,11 +7,11 @@ using JetBrains.Annotations;
 
 namespace mazharenko.result;
 
-[PublicAPI]
+[PublicAPI]	
 public static class ExtractExtensions
 {
 	[Pure]
-	internal static (bool isSuccess, T value, TFailure failure) Get<T, TFailure>(Result<T, TFailure> result)
+	internal static (bool isSuccess, T value, TFailure failure) Get<T, TFailure>(this Result<T, TFailure> result)
 	{
 		return result.Match(v => (true, v, default(TFailure)!), f => (false, default(T)!, f));
 	}
@@ -94,10 +94,13 @@ public static class ExtractExtensions
 		Func<TIn, Result<T, TFailure>> f,
 		Action<TFailure> actionForFailures)
 	{
-		return source.Select(f)
-			.Select(Get)
-			.Where(t => t.isSuccess)
-			.Select(t => t.value)
-			.ToList();
+		var oks = new List<T>();
+		var extracted = source.Select(f).Select(Get);
+		foreach (var (isSuccess, value, failure) in extracted)
+		{
+			if (isSuccess) oks.Add(value);
+			else actionForFailures(failure);
+		}
+		return oks;
 	}
 }
