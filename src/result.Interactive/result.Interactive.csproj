@@ -10,7 +10,7 @@
   <PropertyGroup>
     <IsPackable>true</IsPackable>
     <PackageId>mazharenko.result.Interactive</PackageId>
-    <Version>0.2.0</Version>
+    <Version>0.2.1</Version>
     <Authors>mazharenko</Authors>
     <PackageDescription>.NET Interactive extensions for yet another result monad</PackageDescription>
     <RepositoryUrl>https://github.com/mazharenko/result</RepositoryUrl>
