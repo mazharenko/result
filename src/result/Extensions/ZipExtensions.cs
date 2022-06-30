@@ -27,74 +27,68 @@ public static class ZipExtensions
 		this (Result<T1, Errors<TFailure>>, Result<T2, Errors<TFailure>>) source,
 		Func<ICollection<Errors<TFailure>>, TFailure> zipRootFactory)
 	{
+		var r1 = source.Item1.Get();
+		var r2 = source.Item2.Get();
+
+		if (r1.isSuccess && r2.isSuccess)
+			return (r1.value, r2.value);
+		
 		var failures = new List<Errors<TFailure>>();
 
-		Result<T, Errors<TFailure>> AddFailure<T>(Errors<TFailure> failure)
-		{
-			failures.Add(failure);
-			return failure;
-		}
+		if (!r1.isSuccess)
+			failures.Add(r1.failure);
+		if (!r2.isSuccess)
+			failures.Add(r2.failure);
 
-		var r1 = source.Item1.OrBind(AddFailure<T1>);
-		var r2 = source.Item2.OrBind(AddFailure<T2>);
-
-		var zippedOk =
-			from value1 in r1
-			from value2 in r2
-			select (value1, value2);
-
-		return zippedOk.OrMap(_ => zipRootFactory(failures)!.ToErrors(failures));
+		return zipRootFactory(failures)!.ToErrors(failures);
 	}
 	
 	public static Result<(T1, T2, T3), Errors<TFailure>> Zip<T1, T2, T3, TFailure>(
 		this (Result<T1, Errors<TFailure>>, Result<T2, Errors<TFailure>>, Result<T3, Errors<TFailure>>) source,
 		Func<ICollection<Errors<TFailure>>, TFailure> zipRootFactory)
 	{
+		var r1 = source.Item1.Get();
+		var r2 = source.Item2.Get();
+		var r3 = source.Item3.Get();
+
+		if (r1.isSuccess && r2.isSuccess && r3.isSuccess)
+			return (r1.value, r2.value, r3.value);
+		
 		var failures = new List<Errors<TFailure>>();
 
-		Result<T, Errors<TFailure>> AddFailure<T>(Errors<TFailure> failure)
-		{
-			failures.Add(failure);
-			return failure;
-		}
+		if (!r1.isSuccess)
+			failures.Add(r1.failure);
+		if (!r2.isSuccess)
+			failures.Add(r2.failure);
+		if (!r3.isSuccess)
+			failures.Add(r3.failure);
 
-		var r1 = source.Item1.OrBind(AddFailure<T1>);
-		var r2 = source.Item2.OrBind(AddFailure<T2>);
-		var r3 = source.Item3.OrBind(AddFailure<T3>);
-
-		var zippedOk =
-			from value1 in r1
-			from value2 in r2
-			from value3 in r3
-			select (value1, value2, value3);
-
-		return zippedOk.OrMap(_ => zipRootFactory(failures)!.ToErrors(failures));
+		return zipRootFactory(failures)!.ToErrors(failures);
 	}
 	
 	public static Result<(T1, T2, T3, T4), Errors<TFailure>> Zip<T1, T2, T3, T4, TFailure>(
 		this (Result<T1, Errors<TFailure>>, Result<T2, Errors<TFailure>>, Result<T3, Errors<TFailure>>, Result<T4, Errors<TFailure>>) source,
 		Func<ICollection<Errors<TFailure>>, TFailure> zipRootFactory)
 	{
+		var r1 = source.Item1.Get();
+		var r2 = source.Item2.Get();
+		var r3 = source.Item3.Get();
+		var r4 = source.Item4.Get();
+
+		if (r1.isSuccess && r2.isSuccess && r3.isSuccess && r4.isSuccess)
+			return (r1.value, r2.value, r3.value, r4.value);
+		
 		var failures = new List<Errors<TFailure>>();
 
-		Result<T, Errors<TFailure>> AddFailure<T>(Errors<TFailure> failure)
-		{
-			failures.Add(failure);
-			return failure;
-		}
+		if (!r1.isSuccess)
+			failures.Add(r1.failure);
+		if (!r2.isSuccess)
+			failures.Add(r2.failure);
+		if (!r3.isSuccess)
+			failures.Add(r3.failure);
+		if (!r4.isSuccess)
+			failures.Add(r4.failure);
 
-		var r1 = source.Item1.OrBind(AddFailure<T1>);
-		var r2 = source.Item2.OrBind(AddFailure<T2>);
-		var r3 = source.Item3.OrBind(AddFailure<T3>);
-		var r4 = source.Item4.OrBind(AddFailure<T4>);
-
-		var zippedOk =
-			from value1 in r1
-			from value2 in r2
-			from value3 in r3
-			from value4 in r4
-			select (value1, value2, value3, value4);
-
-		return zippedOk.OrMap(_ => zipRootFactory(failures)!.ToErrors(failures));
+		return zipRootFactory(failures)!.ToErrors(failures);
 	}
 }
