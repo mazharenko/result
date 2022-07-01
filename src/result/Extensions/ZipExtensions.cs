@@ -8,21 +8,25 @@ namespace mazharenko.result;
 [PublicAPI]
 public static class ZipExtensions
 {
+	[Pure]
 	public static Result<T, Errors<TFailure>> ToErrors<T, TFailure>(this Result<T, TFailure> source)
 	{
 		return source.OrMap(f => f!.ToErrors());
 	}
 	
+	[MustUseReturnValue]
 	public static IEnumerable<Result<T, Errors<TFailure>>> ToErrors<T, TFailure>(
 		this IEnumerable<Result<T, TFailure>> results) 
 		=> results.Select(ToErrors);
 	
+	[MustUseReturnValue]
 	public static Result<T, Errors<TFailure>> Zip<T, TFailure>(this Result<T, Errors<TFailure>> source, 
 		Func<Errors<TFailure>, TFailure> zipRootFactory)
 	{
 		return source.OrMap(f => zipRootFactory(f)!.ToErrors(f));
 	}
 	
+	[MustUseReturnValue]
 	public static Result<(T1, T2), Errors<TFailure>> Zip<T1, T2, TFailure>(
 		this (Result<T1, Errors<TFailure>>, Result<T2, Errors<TFailure>>) source,
 		Func<ICollection<Errors<TFailure>>, TFailure> zipRootFactory)
@@ -43,6 +47,7 @@ public static class ZipExtensions
 		return zipRootFactory(failures)!.ToErrors(failures);
 	}
 	
+	[MustUseReturnValue]
 	public static Result<(T1, T2, T3), Errors<TFailure>> Zip<T1, T2, T3, TFailure>(
 		this (Result<T1, Errors<TFailure>>, Result<T2, Errors<TFailure>>, Result<T3, Errors<TFailure>>) source,
 		Func<ICollection<Errors<TFailure>>, TFailure> zipRootFactory)
@@ -66,6 +71,7 @@ public static class ZipExtensions
 		return zipRootFactory(failures)!.ToErrors(failures);
 	}
 	
+	[MustUseReturnValue]
 	public static Result<(T1, T2, T3, T4), Errors<TFailure>> Zip<T1, T2, T3, T4, TFailure>(
 		this (Result<T1, Errors<TFailure>>, Result<T2, Errors<TFailure>>, Result<T3, Errors<TFailure>>, Result<T4, Errors<TFailure>>) source,
 		Func<ICollection<Errors<TFailure>>, TFailure> zipRootFactory)
@@ -90,5 +96,16 @@ public static class ZipExtensions
 			failures.Add(r4.failure);
 
 		return zipRootFactory(failures)!.ToErrors(failures);
+	}
+	
+	[MustUseReturnValue]
+	public static Result<ICollection<T>, Errors<TFailure>> Zip<T, TFailure>(
+		this IEnumerable<Result<T, Errors<TFailure>>> results,
+		Func<ICollection<Errors<TFailure>>, TFailure> zipRootFactory)
+	{
+		var (oks, failures) = results.Partition();
+		if (failures.Count == 0)
+			return Result.Success(oks);
+		return zipRootFactory(failures)!.ToErrors(failures.ToArray());
 	}
 }
