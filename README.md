@@ -1,5 +1,8 @@
+[![Nuget package](https://img.shields.io/nuget/v/mazharenko.result.svg?label=result&logo=nuget)](https://www.nuget.org/packages/mazharenko.result/)\
+[![Nuget package](https://img.shields.io/nuget/v/mazharenko.result.Extensions.FluentAssertions.svg?label=result%20for%20FluentAssertions&logo=nuget)](https://www.nuget.org/packages/mazharenko.result.Extensions.FluentAssertions/)
+[![Nuget package](https://img.shields.io/nuget/vpre/mazharenko.result.Interactive.svg?label=result%20for%20.NET%20Interactive&logo=nuget)](https://www.nuget.org/packages/mazharenko.result.Interactive/)
 
-[![Nuget package](https://img.shields.io/nuget/v/mazharenko.result.svg)](https://www.nuget.org/packages/mazharenko.result/)
+
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](LICENSE)
 
 
